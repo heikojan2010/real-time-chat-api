@@ -40,6 +40,12 @@ INSTALLED_APPS = [
     'channels',
     'chat.core.apps.CoreConfig',
     'chat.channels_app.apps.ChannelsAppConfig',
+
+    'django_react_components',
+    'webpack_loader',
+
+    'real_time_chat_frontend',
+
 ]
 
 MIDDLEWARE = [
@@ -57,7 +63,7 @@ ROOT_URLCONF = 'chat.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR+'templates' ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -65,6 +71,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+              
+
             ],
         },
     },
@@ -122,6 +130,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+#STATIC_DIRS = [ 
+#    BASE_DIR+'real_time_chat_frontend/build/'
+#]
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATICFILES_FINDERS = [
+    # Required for CRAManifestFinder below to work
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    # A finder to pull in asset-manifest.json
+   
+]
+
 
 # Channel layer definitions
 # http://channels.readthedocs.org/en/latest/deploying.html#setting-up-a-channel-backend

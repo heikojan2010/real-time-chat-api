@@ -1,0 +1,23 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1>
+Hello from le websox!
+</h1>
+
+
+{% endblock content %}
+
+{% block script %}
+  <script>
+    var socket = new WebSocket('ws://' + window.location.host + '/users/');
+
+    socket.onopen = function open() {
+      console.log('WebSockets connection created.');
+    };
+
+    if (socket.readyState == WebSocket.OPEN) {
+      socket.onopen();
+    }
+  </script>
+{% endblock script %}

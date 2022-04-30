@@ -3,8 +3,15 @@ from channels.generic.websocket import WebsocketConsumer
 import json
 from chat.core.models.user import User
 from chat.core.models.message import Message
+from channels import Group
 
 
+def ws_connect(message):
+    Group('users').add(message.reply_channel)
+
+
+def ws_disconnect(message):
+    Group('users').discard(message.reply_channel)
 class ChatConsumer(WebsocketConsumer):
 
     def init_chat(self, data):
